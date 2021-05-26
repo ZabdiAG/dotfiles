@@ -11,7 +11,8 @@ import shutil
 
 ## Add here the files you intend to install
 FILES = [
-    'vimrc'
+    'vimrc',
+    'tmux.conf'
 ] 
 
 homeDir = os.environ['HOME']
