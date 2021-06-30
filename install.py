@@ -16,5 +16,5 @@ FILES = [
 ] 
 
 homeDir = os.environ['HOME']
-for x in files:
+for x in FILES:
     shutil.copy(x, os.path.join(homeDir, "." + x))

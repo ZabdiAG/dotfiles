@@ -22,6 +22,7 @@ Plugin 'sickill/vim-monokai'
 Plugin 'fatih/vim-go'
 Plugin 'pangloss/vim-javascript'
 Plugin 'cespare/vim-toml'
+Plugin 'rust-lang/rust.vim'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -46,7 +47,6 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
 
 
 " go config
@@ -88,3 +88,9 @@ autocmd Filetype json setlocal ts=4 sw=4 sts=0 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype html setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
+
+"" Folding configuration, automatically folds file when open
+set foldcolumn=1
+set foldmethod=syntax
+"" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
+let g:go_fmt_experimental=1
