@@ -23,6 +23,9 @@ Plugin 'fatih/vim-go'
 Plugin 'pangloss/vim-javascript'
 Plugin 'cespare/vim-toml'
 Plugin 'rust-lang/rust.vim'
+Plugin 'junegunn/fzf'
+Plugin 'dracula/vim', { 'name': 'dracula' }
+
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -54,6 +57,9 @@ let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_fmt_command = "goimports"	 " format with goimports instead of gofmt
 
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+
 " javascript config
 let g:javascript_plugin_jsdoc = 1
 
@@ -61,9 +67,13 @@ let g:javascript_plugin_jsdoc = 1
 let mapleader = " "
 
 syntax enable
-colorscheme monokai
 set t_Co=256              " enable 256-color mode.
 set number                " show line numbers
+set relativenumber
+" colorscheme monokai
+packadd! dracula
+colorscheme dracula
+
 
 " Plugin 'kien/ctrlp.vim' Config:
 let g:ctrlp_show_hidden = 1
@@ -94,3 +104,42 @@ set foldcolumn=1
 set foldmethod=syntax
 "" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
 let g:go_fmt_experimental=1
+
+
+"" go to def
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+"" go testing
+map <leader>tt :GoTest<CR>
+
+"" go debug testing
+au FileType go map <leader>ts :GoDebugTest<CR>
+au FileType go map <leader>tb :GoDebugBreakpoint<CR>
+au FileType go map <leader>tc :GoDebugContinue<CR>
+au FileType go map <leader>tn :GoDebugNext<CR>
+au FileType go map <leader>tx :GoDebugStop<CR>
+
+"" resize split
+map <leader>[ :vertical resize +5<CR>
+map <leader>] :vertical resize -5<CR>
+
+"" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+"" closing brackets, https://vim.fandom.com/wiki/Automatically_append_closing_characters
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{     {
+inoremap {}     {}
+
+"" closing parenthesis
+inoremap (      ()<Left>
+inoremap (<CR>  (<CR>}<Esc>)
+inoremap ((     (
+inoremap ()     ()
+
+
+"" fzf
+nnoremap <c-p> :Files<CR>
