@@ -88,6 +88,15 @@ let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|sv
 " set softtabstop=2
 " set autoindent            " auto-indent
 " set shiftround            " always indent/outdent to the nearest tabstop
+"
+" Highlight characters that go over 100 columns (by drawing a border on the 101st)
+if exists('+colorcolumn')
+  set colorcolumn=101 " sets 100 characters line length max
+  "highlight ColorColumn ctermbg=white
+else
+  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+  match OverLength /\%101v.\+/
+endif
 
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype coffeescript setlocal ts=4 sw=4 sts=0 expandtab
@@ -136,10 +145,12 @@ inoremap {}     {}
 
 "" closing parenthesis
 inoremap (      ()<Left>
-inoremap (<CR>  (<CR>}<Esc>)
+inoremap (<CR>  (<CR>)<Esc>O
 inoremap ((     (
 inoremap ()     ()
 
-
-"" fzf
-nnoremap <c-p> :Files<CR>
+"" closing double quote
+inoremap "      ""<Left>
+inoremap "<CR>  "<CR>"<Esc>O
+inoremap ""     "
+inoremap ""     ""
