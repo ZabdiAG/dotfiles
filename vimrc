@@ -25,7 +25,10 @@ Plugin 'cespare/vim-toml'
 Plugin 'rust-lang/rust.vim'
 Plugin 'junegunn/fzf'
 Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'https://github.com/github/copilot.vim.git'
 
+" Kotlin
+Plugin 'udalov/kotlin-vim'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
@@ -149,8 +152,18 @@ inoremap (<CR>  (<CR>)<Esc>O
 inoremap ((     (
 inoremap ()     ()
 
+"" closing parenthesis
+inoremap [      []<Left>
+inoremap [<CR>  [<CR>]<Esc>O
+inoremap [[     [
+inoremap []     []
+
 "" closing double quote
 inoremap "      ""<Left>
 inoremap "<CR>  "<CR>"<Esc>O
 inoremap ""     "
 inoremap ""     ""
+
+"" highlight search
+" toogle
+map <leader>hl :set hlsearch!<CR>
