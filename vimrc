@@ -1,46 +1,66 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible	" This option has the effect of making Vim either more Vi-compatible, or
+			" make Vim behave in a more useful way.
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+filetype off		" required
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Automatic installation vim-plug https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'valloric/youcompleteme'
-Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'w0rp/ale'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'sickill/vim-monokai'
-Plugin 'fatih/vim-go'
-Plugin 'pangloss/vim-javascript'
-Plugin 'cespare/vim-toml'
-Plugin 'rust-lang/rust.vim'
-Plugin 'junegunn/fzf'
-Plugin 'dracula/vim', { 'name': 'dracula' }
-Plugin 'https://github.com/github/copilot.vim.git'
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
-" Kotlin
-Plugin 'udalov/kotlin-vim'
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+  \| endif
+
+" Plugin list
+call plug#begin() " $HOME/.local/share/nvim/plugged
+
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'valloric/youcompleteme' " TODO: we probably will change it to a LSP
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-surround'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'w0rp/ale'
+Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
+Plug 'sickill/vim-monokai'
+Plug 'fatih/vim-go'
+Plug 'pangloss/vim-javascript'
+Plug 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim'
+" Plug 'junegunn/fzf' TODO: still needs configuration https://github.com/junegunn/fzf.vim
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'https://github.com/github/copilot.vim.git'
+Plug 'udalov/kotlin-vim'
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plug 'rstacruz/sparkup', {'rtp': 'vim/'} TODO: review what is this for
 "
-" Install L9 and avoid a Naming conflict if you've already installed a
+""" Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
-Plugin 'ascenator/L9', {'name': 'newL9'}
+" Plug 'ascenator/L9', {'name': 'newL9'} TODO: review what is this for
+
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
+"
+call plug#end()
 
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -55,7 +75,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 
-" go config
+"""" Golang config
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_fmt_command = "goimports"	 " format with goimports instead of gofmt
@@ -63,7 +83,22 @@ let g:go_fmt_command = "goimports"	 " format with goimports instead of gofmt
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 
-" javascript config
+"" testing
+au FileType go map <leader>tt :GoTest<CR>
+
+"" debug testing
+au FileType go map <leader>ts :GoDebugTest<CR>
+au FileType go map <leader>tb :GoDebugBreakpoint<CR>
+au FileType go map <leader>tc :GoDebugContinue<CR>
+au FileType go map <leader>tn :GoDebugNext<CR>
+au FileType go map <leader>tx :GoDebugStop<CR>
+
+"" Implementers
+au FileType go map <leader>gi :GoImplements<CR>
+au FileType go map <leader>gr :GoReferrers<CR>
+
+
+"""" javascript config
 let g:javascript_plugin_jsdoc = 1
 
 " change map keyboard button
@@ -123,15 +158,6 @@ au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
-"" go testing
-map <leader>tt :GoTest<CR>
-
-"" go debug testing
-au FileType go map <leader>ts :GoDebugTest<CR>
-au FileType go map <leader>tb :GoDebugBreakpoint<CR>
-au FileType go map <leader>tc :GoDebugContinue<CR>
-au FileType go map <leader>tn :GoDebugNext<CR>
-au FileType go map <leader>tx :GoDebugStop<CR>
 
 "" resize split
 map <leader>[ :vertical resize +5<CR>
@@ -167,3 +193,24 @@ inoremap ""     ""
 "" highlight search
 " toogle
 map <leader>hl :set hlsearch!<CR>
+
+
+"" jq, JSON prettier file
+map <leader>jq :%!jq . <CR>
+
+
+"" https://vim.fandom.com/wiki/Git_grep
+""func GitGrep(...)
+""  let save = &grepprg
+""  set grepprg=git\ grep\ -n\ $*
+""  let s = 'grep'
+""  for i in a:000
+""    let s = s . ' ' . i
+""  endfor
+""  exe s
+""  let &grepprg = save
+""endfun
+""command -nargs=? G call GitGrep(<f-args>)
+
+"" Copy to clipboard
+map <leader>c w !pbcopy<CR>
