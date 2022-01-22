@@ -27,14 +27,15 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 " Plugin list
 call plug#begin() " $HOME/.local/share/nvim/plugged
+	Plug 'scrooloose/nerdtree'
 	Plug 'tpope/vim-fugitive'
 	Plug 'airblade/vim-gitgutter'
+	Plug 'vim-airline/vim-airline'
+	Plug 'tpope/vim-surround'
+	Plug 'Yggdroot/indentLine'
 	Plug 'valloric/youcompleteme' " TODO: we probably will change it to a LSP
 	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'tpope/vim-surround'
 	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'scrooloose/nerdtree'
-	Plug 'vim-airline/vim-airline'
 	Plug 'w0rp/ale'
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'easymotion/vim-easymotion'
@@ -75,8 +76,8 @@ map <leader>hl :set hlsearch!<CR>
 map <leader>jq :%!jq . <CR>
 
 
-"" Copy to clipboard
-map <leader>c w !pbcopy<CR>
+"" Copy to clipboard, NOT WORKING
+map <leader>c w !pbcopy<CR> 
 
 
 syntax enable
