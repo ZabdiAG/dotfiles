@@ -91,7 +91,7 @@ packadd! dracula
 colorscheme dracula
 
 
-" Golang config
+"==================== Golang config ====================
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_fmt_command = "goimports"	 " format with goimports instead of gofmt
@@ -100,15 +100,21 @@ let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 
 au FileType go map <leader>tt :GoTest<CR>
+au FileType go map <leader>tf :GoTestFunc<CR>
 
-au FileType go map <leader>ts :GoDebugTest<CR>
-au FileType go map <leader>tb :GoDebugBreakpoint<CR>
-au FileType go map <leader>tc :GoDebugContinue<CR>
-au FileType go map <leader>tn :GoDebugNext<CR>
-au FileType go map <leader>tx :GoDebugStop<CR>
+au FileType go map <leader>ds :GoDebugTest<CR>
+au FileType go map <leader>db :GoDebugBreakpoint<CR>
+au FileType go map <leader>dc :GoDebugContinue<CR>
+au FileType go map <leader>dn :GoDebugNext<CR>
+au FileType go map <leader>dx :GoDebugStop<CR>
 
 au FileType go map <leader>gi :GoImplements<CR>
 au FileType go map <leader>gr :GoReferrers<CR>
+
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 
 "" Javascript config
@@ -153,11 +159,6 @@ set foldmethod=syntax
 "" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
 let g:go_fmt_experimental=1
 
-
-"" go to def
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 
 "" resize split
