@@ -76,10 +76,6 @@ map <leader>hl :set hlsearch!<CR>
 map <leader>jq :%!jq . <CR>
 
 
-"" Copy to clipboard, NOT WORKING
-map <leader>c w !pbcopy<CR> 
-
-
 syntax enable
 set t_Co=256              " enable 256-color mode.
 set number                " show line numbers
@@ -191,3 +187,8 @@ inoremap "      ""<Left>
 inoremap "<CR>  "<CR>"<Esc>O
 inoremap ""     "
 inoremap ""     ""
+
+"" Save/close tab
+map <leader>q :q<cr>
+map <leader>w :w<cr>
+map <leader>wq :wq<cr>
