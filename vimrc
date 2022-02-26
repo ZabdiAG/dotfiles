@@ -98,11 +98,12 @@ let g:go_highlight_functions = 1
 au FileType go map <leader>tt :GoTest<CR>
 au FileType go map <leader>tf :GoTestFunc<CR>
 
-au FileType go map <leader>ds :GoDebugTest<CR>
-au FileType go map <leader>db :GoDebugBreakpoint<CR>
-au FileType go map <leader>dc :GoDebugContinue<CR>
-au FileType go map <leader>dn :GoDebugNext<CR>
-au FileType go map <leader>dx :GoDebugStop<CR>
+au FileType go map <leader>tdt :GoDebugTest<CR>
+au FileType go map <leader>tdf :GoDebugTestFunc<CR>
+au FileType go map <leader>tdb :GoDebugBreakpoint<CR>
+au FileType go map <leader>tdc :GoDebugContinue<CR>
+au FileType go map <leader>tdn :GoDebugNext<CR>
+au FileType go map <leader>tdx :GoDebugStop<CR>
 
 au FileType go map <leader>gi :GoImplements<CR>
 au FileType go map <leader>gr :GoReferrers<CR>
@@ -112,6 +113,16 @@ au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
+"==================== Golang config END ====================
+
+
+"==================== Rust config ====================
+
+"" Auto formatting with :RustFmt
+let g:rustfmt_autosave = 1
+
+
+"==================== Rust config END====================
 
 "" Javascript config
 let g:javascript_plugin_jsdoc = 1
