@@ -33,8 +33,6 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'vim-airline/vim-airline'
 	Plug 'tpope/vim-surround'
 	Plug 'Yggdroot/indentLine'
-	Plug 'valloric/youcompleteme' " TODO: we probably will change it to a LSP
-	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'w0rp/ale'
 	Plug 'scrooloose/nerdcommenter'
@@ -44,18 +42,17 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'pangloss/vim-javascript'
 	Plug 'cespare/vim-toml'
 	Plug 'rust-lang/rust.vim'
-	" Plug 'junegunn/fzf' TODO: still needs configuration https://github.com/junegunn/fzf.vim
 	Plug 'dracula/vim', { 'as': 'dracula' }
 	Plug 'https://github.com/github/copilot.vim.git'
-	Plug 'udalov/kotlin-vim'
-	
-	" The sparkup vim script is in a subdirectory of this repo called vim.
-	" Pass the path to set the runtimepath properly.
-	" Plug 'rstacruz/sparkup', {'rtp': 'vim/'} TODO: review what is this for
-	"
-	""" Install L9 and avoid a Naming conflict if you've already installed a
-	" different version somewhere else.
-	" Plug 'ascenator/L9', {'name': 'newL9'} TODO: review what is this for
+
+	"" Installation instruction on Neovim: /Users/luisaguilera/.local/share/nvim/plugged/youcompleteme (README.md)
+	Plug 'valloric/youcompleteme'
+
+
+	"" TODO: https://neovim.io/doc/user/lsp.html#:~:text=QUICKSTART%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*lsp%2Dquickstart*
+	"" Still experimenting as it makes Neovim slow
+	Plug 'neovim/nvim-lspconfig'
+	" TODO: Install https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
 call plug#end()
 
 
@@ -94,6 +91,16 @@ let g:go_fmt_command = "goimports"	 " format with goimports instead of gofmt
 
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+
+"" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
+let g:go_fmt_experimental=1
+
+" Status line types/signatures
+"" let g:go_auto_type_info = 1
+
 
 au FileType go map <leader>tt :GoTest<CR>
 au FileType go map <leader>tf :GoTestFunc<CR>
@@ -163,10 +170,6 @@ autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
 "" Folding configuration, automatically folds file when open
 set foldcolumn=1
 set foldmethod=syntax
-"" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
-let g:go_fmt_experimental=1
-
-
 
 "" resize split
 map <leader>[ :vertical resize +5<CR>
@@ -203,3 +206,9 @@ inoremap ""     ""
 map <leader>q :q<cr>
 map <leader>w :w<cr>
 map <leader>wq :wq<cr>
+
+
+lua require('lspconfig').gopls.setup{}
+
+"" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
+set completeopt=menu,menuone,noselect

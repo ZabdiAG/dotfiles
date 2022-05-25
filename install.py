@@ -13,6 +13,7 @@ import shutil
 FILES = [
     'vimrc',
     'tmux.conf'
+    'config'
 ] 
 
 homeDir = os.environ['HOME']
