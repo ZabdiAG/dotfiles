@@ -53,6 +53,9 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	"" Still experimenting as it makes Neovim slow
 	Plug 'neovim/nvim-lspconfig'
 	" TODO: Install https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
+	"
+	""  Terraform plugins
+	Plug 'hashivim/vim-terraform'
 call plug#end()
 
 
@@ -87,7 +90,13 @@ colorscheme dracula
 "==================== Golang config ====================
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
-let g:go_fmt_command = "goimports"	 " format with goimports instead of gofmt
+
+let g:go_fmt_command = "gopls"	 " format with goimports instead of gofmt
+let g:go_gopls_gofumpt=1
+
+"" https://github.com/daixiang0/gci
+"" let g:go_fmt_command = "gci print"	 " format with goimports instead of gofmt
+
 
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
@@ -120,6 +129,8 @@ au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
+au Filetype go nmap <leader>ts :normal i time.Sleep(time.Minute*10<CR>
+
 "==================== Golang config END ====================
 
 
@@ -136,7 +147,7 @@ let g:javascript_plugin_jsdoc = 1
 "
 " Plugin 'kien/ctrlp.vim' Config:
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|dist)|(\.(swp|ico|git|svn))$'
 
 
 "" TODO: all of the bellow is on testing
@@ -207,8 +218,22 @@ map <leader>q :q<cr>
 map <leader>w :w<cr>
 map <leader>wq :wq<cr>
 
+"" Set list
+set list
+set listchars=tab:‚ñ∏¬∑
 
 lua require('lspconfig').gopls.setup{}
 
+"" Delete trim spaces
+autocmd BufWritePre * :%s/\s\+$//e
+
 "" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
 set completeopt=menu,menuone,noselect
+
+" Disable quote concealing in JSON files
+let g:vim_json_conceal=0
+
+"" Remove unwanted spaces
+"" https://vim.fandom.com/wiki/Remove_unwanted_spaces#:~:text=One%20way%20to%20make%20sure,all%20trailing%20whitespace%20before%20saving.
+map <leader>dts :%s/\s\+$//e<CR>
+
