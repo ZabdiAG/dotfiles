@@ -224,9 +224,6 @@ set listchars=tab:‚ñ∏¬∑
 
 lua require('lspconfig').gopls.setup{}
 
-"" Delete trim spaces
-autocmd BufWritePre * :%s/\s\+$//e
-
 "" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
 set completeopt=menu,menuone,noselect
 
@@ -237,3 +234,11 @@ let g:vim_json_conceal=0
 "" https://vim.fandom.com/wiki/Remove_unwanted_spaces#:~:text=One%20way%20to%20make%20sure,all%20trailing%20whitespace%20before%20saving.
 map <leader>dts :%s/\s\+$//e<CR>
 
+"" Delete trim spaces only on certain fileTypes
+autocmd FileType c,cpp,java,php,go,js autocmd BufWritePre <buffer> %s/\s\+$//e
+
+
+"" Markdown configs
+let g:markdown_folding=1
+
+"let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'golang']
