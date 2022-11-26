@@ -44,6 +44,9 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'rust-lang/rust.vim'
 	Plug 'dracula/vim', { 'as': 'dracula' }
 	Plug 'https://github.com/github/copilot.vim.git'
+	
+	"" https://thoughtbot.com/blog/align-github-flavored-markdown-tables-in-vim
+	Plug 'junegunn/vim-easy-align'
 
 	"" Installation instruction on Neovim: /Users/luisaguilera/.local/share/nvim/plugged/youcompleteme (README.md)
 	Plug 'valloric/youcompleteme'
@@ -129,7 +132,7 @@ au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
-au Filetype go nmap <leader>ts :normal i time.Sleep(time.Minute*10<CR>
+au Filetype go map <leader>ts :normal i time.Sleep(time.Minute*10<CR>
 
 "==================== Golang config END ====================
 
@@ -220,9 +223,14 @@ map <leader>wq :wq<cr>
 
 "" Set list
 set list
-set listchars=tab:‚ñ∏¬∑
+set listchars=tab:▸·
 
 lua require('lspconfig').gopls.setup{}
+
+"" Set clipboard with yank copy
+"" https://stackoverflow.com/questions/677986/how-to-copy-a-selection-to-the-os-x-clipboard
+set clipboard=unnamed
+
 
 "" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
 set completeopt=menu,menuone,noselect
@@ -242,3 +250,12 @@ autocmd FileType c,cpp,java,php,go,js autocmd BufWritePre <buffer> %s/\s\+$//e
 let g:markdown_folding=1
 
 "let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'golang']
+
+
+" Align GitHub-flavored Markdown tables
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
+
+
+" Format current file JSON format
+" :%!jq .
+"
