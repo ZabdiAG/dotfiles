@@ -1,0 +1,13 @@
+# Configuration file alacritty under ~/.config/alacritty/alacritty.toml
+
+[window]
+decorations = "Buttonless"
+
+[font]
+size = 16
+
+[keyboard]
+bindings = [
+  { key = "Right", mods = "Alt", chars = "\u001BF" },
+  { key = "Left",  mods = "Alt", chars = "\u001BB" },
+]
