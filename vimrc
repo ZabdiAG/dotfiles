@@ -34,31 +34,40 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'tpope/vim-surround'
 	Plug 'Yggdroot/indentLine'
 	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'w0rp/ale'
+	"Plug 'dense-analysis/ale'
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'easymotion/vim-easymotion'
 	Plug 'sickill/vim-monokai'
-	Plug 'fatih/vim-go'
+	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 	Plug 'pangloss/vim-javascript'
 	Plug 'cespare/vim-toml'
 	Plug 'rust-lang/rust.vim'
+
+	"" Themes
+	Plug 'joshdick/onedark.vim'
 	Plug 'dracula/vim', { 'as': 'dracula' }
+
 	Plug 'https://github.com/github/copilot.vim.git'
-	
+
 	"" https://thoughtbot.com/blog/align-github-flavored-markdown-tables-in-vim
 	Plug 'junegunn/vim-easy-align'
 
 	"" Installation instruction on Neovim: /Users/luisaguilera/.local/share/nvim/plugged/youcompleteme (README.md)
 	Plug 'valloric/youcompleteme'
 
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim' , { 'tag': '0.1.5' }
 
-	"" TODO: https://neovim.io/doc/user/lsp.html#:~:text=QUICKSTART%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*lsp%2Dquickstart*
+	" TODO: https://neovim.io/doc/user/lsp.html#:~:text=QUICKSTART%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*lsp%2Dquickstart*
 	"" Still experimenting as it makes Neovim slow
-	Plug 'neovim/nvim-lspconfig'
+	"" Plug 'neovim/nvim-lspconfig'
 	" TODO: Install https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
 	"
 	""  Terraform plugins
 	Plug 'hashivim/vim-terraform'
+
+	"" Tilt plugins
+	Plug 'cappyzawa/starlark.vim'
 call plug#end()
 
 
@@ -85,9 +94,10 @@ set number                " show line numbers
 set relativenumber
 
 
-" colorscheme monokai
-packadd! dracula
-colorscheme dracula
+"colorscheme monokai
+colorscheme onedark
+"packadd! dracula
+"colorscheme dracula
 
 
 "==================== Golang config ====================
@@ -109,6 +119,9 @@ let g:go_highlight_operators = 1
 
 "" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
 let g:go_fmt_experimental=1
+
+" Enable all of the linters you want for Go.
+"let g:ale_linters = {'go': ['golangci-lint', 'gofmt']}
 
 " Status line types/signatures
 "" let g:go_auto_type_info = 1
@@ -164,7 +177,7 @@ let g:ctrlp_custom_ignore = '\v[\/](node_modules|dist)|(\.(swp|ico|git|svn))$'
 "
 " Highlight characters that go over 100 columns (by drawing a border on the 101st)
 if exists('+colorcolumn')
-  set colorcolumn=101 " sets 100 characters line length max
+  set colorcolumn=120 " sets 100 characters line length max
   "highlight ColorColumn ctermbg=white
 else
   highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -185,12 +198,17 @@ autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
 set foldcolumn=1
 set foldmethod=syntax
 
+" Set fold method to indent on yaml,yml files
+autocmd FileType yaml,yml setlocal foldmethod=indent
+
+
 "" resize split
-map <leader>[ :vertical resize +5<CR>
-map <leader>] :vertical resize -5<CR>
+map <leader>[ :vertical resize -5<CR>
+map <leader>] :vertical resize +5<CR>
 
 "" NERDTree
 map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "right"
 
 "" closing brackets, https://vim.fandom.com/wiki/Automatically_append_closing_characters
 inoremap {      {}<Left>
@@ -225,11 +243,12 @@ map <leader>wq :wq<cr>
 set list
 set listchars=tab:▸·
 
-lua require('lspconfig').gopls.setup{}
+"" lua require('lspconfig').gopls.setup{}
 
 "" Set clipboard with yank copy
 "" https://stackoverflow.com/questions/677986/how-to-copy-a-selection-to-the-os-x-clipboard
 set clipboard=unnamed
+
 
 
 "" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
@@ -243,7 +262,7 @@ let g:vim_json_conceal=0
 map <leader>dts :%s/\s\+$//e<CR>
 
 "" Delete trim spaces only on certain fileTypes
-autocmd FileType c,cpp,java,php,go,js autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType c,cpp,java,php,go,js,yml autocmd BufWritePre <buffer> %s/\s\+$//e
 
 
 "" Markdown configs
@@ -259,3 +278,27 @@ au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 " Format current file JSON format
 " :%!jq .
 "
+"
+"" Copilot setup
+"
+"" let g:copilot_node_command = 'path to nodejs binary'
+
+
+"" To use fzf in Vim, add the following line to your .vimrc:
+set rtp+=/opt/homebrew/opt/fzf
+
+
+"" Ignore s3 folders
+"" Ignore s3/prod folders
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](node_modules|dist|\.git|\.svn|\.hg|\.bzr|_darcs|CVS|s3|prod)$',
+  \}
+
+
+"" Detect Starlark file Tiltfile
+autocmd BufNewFile,BufRead Tiltfile* setlocal ft=tiltfile syntax=starlark
+
+
+let g:rust_clip_command = 'pbcopy'
+let g:rustfmt_autosave = 1
+
