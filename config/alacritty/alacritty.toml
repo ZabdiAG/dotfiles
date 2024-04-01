@@ -1,10 +1,15 @@
 # Configuration file alacritty under ~/.config/alacritty/alacritty.toml
+# https://alacritty.org/config-alacritty.html
 
 [window]
 decorations = "Buttonless"
 
 [font]
 size = 16
+
+[font.offset]
+x = 0
+y = 2
 
 [keyboard]
 bindings = [
