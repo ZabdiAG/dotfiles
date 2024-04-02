@@ -302,3 +302,10 @@ autocmd BufNewFile,BufRead Tiltfile* setlocal ft=tiltfile syntax=starlark
 let g:rust_clip_command = 'pbcopy'
 let g:rustfmt_autosave = 1
 
+"" Telescope
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
