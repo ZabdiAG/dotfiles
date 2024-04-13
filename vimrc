@@ -309,3 +309,14 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+"" Git commands
+nnoremap <leader>gs :Git status<CR>
+nnoremap <leader>gl :Git log<CR>
+nnoremap <leader>gd :Git diff<CR>
+nnoremap <leader>gds :Git diff --staged<CR>
+
+"" Git add current opened buffer
+nnoremap <leader>ga :Git add %<CR>
+
+"" Git diff current opened buffer
+nnoremap <leader>gdb :Git diff %<CR>
