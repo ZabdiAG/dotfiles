@@ -44,13 +44,16 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'rust-lang/rust.vim'
 
 	"" Themes
-	Plug 'joshdick/onedark.vim'
+	Plug 'neanias/everforest-nvim', { 'branch': 'main' }
 	Plug 'dracula/vim', { 'as': 'dracula' }
+	Plug 'folke/tokyonight.nvim'
 
 	Plug 'https://github.com/github/copilot.vim.git'
 
 	"" https://thoughtbot.com/blog/align-github-flavored-markdown-tables-in-vim
 	Plug 'junegunn/vim-easy-align'
+
+	Plug 'nvim-orgmode/orgmode'
 
 	"" Installation instruction on Neovim: /Users/luisaguilera/.local/share/nvim/plugged/youcompleteme (README.md)
 	Plug 'valloric/youcompleteme'
@@ -68,6 +71,8 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 
 	"" Tilt plugins
 	Plug 'cappyzawa/starlark.vim'
+
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 
@@ -94,10 +99,7 @@ set number                " show line numbers
 set relativenumber
 
 
-"colorscheme monokai
-colorscheme onedark
-"packadd! dracula
-"colorscheme dracula
+colorscheme tokyonight-night
 
 
 "==================== Golang config ====================
@@ -106,6 +108,7 @@ let g:go_info_mode='gopls'
 
 let g:go_fmt_command = "gopls"	 " format with goimports instead of gofmt
 let g:go_gopls_gofumpt=1
+
 
 "" https://github.com/daixiang0/gci
 "" let g:go_fmt_command = "gci print"	 " format with goimports instead of gofmt
@@ -202,9 +205,9 @@ set foldmethod=syntax
 autocmd FileType yaml,yml setlocal foldmethod=indent
 
 
-"" resize split
-map <leader>[ :vertical resize -5<CR>
-map <leader>] :vertical resize +5<CR>
+"" resize split, https://vim.fandom.com/wiki/Resize_splits_more_quickly
+nnoremap <silent> <Leader>[ :vertical resize +5<CR>
+nnoremap <silent> <Leader>] :vertical resize -5<CR>
 
 "" NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -302,6 +305,7 @@ autocmd BufNewFile,BufRead Tiltfile* setlocal ft=tiltfile syntax=starlark
 let g:rust_clip_command = 'pbcopy'
 let g:rustfmt_autosave = 1
 
+
 "" Telescope
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -320,3 +324,4 @@ nnoremap <leader>ga :Git add %<CR>
 
 "" Git diff current opened buffer
 nnoremap <leader>gdb :Git diff %<CR>
+
