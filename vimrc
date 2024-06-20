@@ -123,8 +123,6 @@ let g:go_highlight_operators = 1
 "" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
 let g:go_fmt_experimental=1
 
-" Enable all of the linters you want for Go.
-"let g:ale_linters = {'go': ['golangci-lint', 'gofmt']}
 
 " Status line types/signatures
 "" let g:go_auto_type_info = 1
@@ -325,3 +323,5 @@ nnoremap <leader>ga :Git add %<CR>
 "" Git diff current opened buffer
 nnoremap <leader>gdb :Git diff %<CR>
 
+"" Git blame
+nnoremap <leader>gb :Git blame<CR>
