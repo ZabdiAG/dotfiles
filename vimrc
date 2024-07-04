@@ -166,6 +166,8 @@ let g:javascript_plugin_jsdoc = 1
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|dist)|(\.(swp|ico|git|svn))$'
 
+"" Configure tab to 2 spaces only for .org files
+autocmd BufRead,BufNewFile *.org setlocal ts=2 sw=2 sts=2 expandtab
 
 "" TODO: all of the bellow is on testing
 " Format config
@@ -325,3 +327,8 @@ nnoremap <leader>gdb :Git diff %<CR>
 
 "" Git blame
 nnoremap <leader>gb :Git blame<CR>
+
+
+"" Split comma separated values into new lines
+"" Usage: Select the text and press <leader>sl
+vnoremap <leader>sl :s/,/,\r/g<CR>
