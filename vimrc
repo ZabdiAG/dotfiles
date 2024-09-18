@@ -128,18 +128,20 @@ let g:go_fmt_experimental=1
 "" let g:go_auto_type_info = 1
 
 
-au FileType go map <leader>tt :GoTest<CR>
-au FileType go map <leader>tf :GoTestFunc<CR>
+au FileType go map <leader>got :GoTest<CR>
+au FileType go map <leader>gotf :GoTestFunc<CR>
 
-au FileType go map <leader>tdt :GoDebugTest<CR>
-au FileType go map <leader>tdf :GoDebugTestFunc<CR>
-au FileType go map <leader>tdb :GoDebugBreakpoint<CR>
-au FileType go map <leader>tdc :GoDebugContinue<CR>
-au FileType go map <leader>tdn :GoDebugNext<CR>
-au FileType go map <leader>tdx :GoDebugStop<CR>
+au FileType go map <leader>godt :GoDebugTest<CR>
+au FileType go map <leader>godtf :GoDebugTestFunc<CR>
+au FileType go map <leader>godb :GoDebugBreakpoint<CR>
+au FileType go map <leader>godc :GoDebugContinue<CR>
+au FileType go map <leader>godn :GoDebugNext<CR>
+au FileType go map <leader>gods :GoDebugStop<CR>
 
-au FileType go map <leader>gi :GoImplements<CR>
-au FileType go map <leader>gr :GoReferrers<CR>
+au FileType go map <leader>goi :GoImplements<CR>
+au FileType go map <leader>gor :GoReferrers<CR>
+au Filetype go map <leader>goc :GoCoverageToggle<CR>
+au Filetype go map <leader>gocb :GoCoverageBrowser<CR>
 
 
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
@@ -325,10 +327,19 @@ nnoremap <leader>ga :Git add %<CR>
 "" Git diff current opened buffer
 nnoremap <leader>gdb :Git diff %<CR>
 
+"" Git diff --staged current opened buffer
+nnoremap <leader>gdsb :Git diff --staged %<CR>
+
 "" Git blame
 nnoremap <leader>gb :Git blame<CR>
+
 
 
 "" Split comma separated values into new lines
 "" Usage: Select the text and press <leader>sl
 vnoremap <leader>sl :s/,/,\r/g<CR>
+
+
+command! UuidGen :execute "normal! a<C-r>=system('uuidgen | tr -d \"\\n\"')<CR>"
+
+nnoremap <leader>uuid :UuidGen<CR>
