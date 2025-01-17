@@ -46,6 +46,7 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim' , { 'tag': '0.1.6' }
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'lukas-reineke/headlines.nvim'
 
 	" Code related
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }

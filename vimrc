@@ -73,6 +73,8 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'cappyzawa/starlark.vim'
 
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+	Plug 'lukas-reineke/headlines.nvim'
 call plug#end()
 
 
