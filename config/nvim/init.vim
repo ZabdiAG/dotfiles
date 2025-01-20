@@ -31,22 +31,22 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'preservim/nerdtree'
 	Plug 'preservim/nerdcommenter'
 	Plug 'tpope/vim-fugitive'
-	Plug 'tpopevim-surround'
+	Plug 'tpope/vim-surround'
 	Plug 'easymotion/vim-easymotion'
 	Plug 'https://github.com/github/copilot.vim.git'
 
 	Plug 'junegunn/vim-easy-align'
 
-	" Plug 'airblade/vim-gitgutter'
+	Plug 'airblade/vim-gitgutter'
 
-	" Experimenting
 	Plug 'junegunn/fzf.vim'
 	Plug 'kevinhwang91/nvim-ufo'
 	Plug 'kevinhwang91/promise-async' " Needed by nvim-ufo
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim' , { 'tag': '0.1.6' }
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-	Plug 'lukas-reineke/headlines.nvim'
+
+	Plug 'nvim-orgmode/orgmode'
 
 	" Code related
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -58,6 +58,16 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 
 	"" Themes
 	Plug 'rebelot/kanagawa.nvim'
+
+	" Experimenting
+	Plug 'williamboman/mason.nvim'
+	Plug 'williamboman/mason-lspconfig.nvim'
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'hrsh7th/nvim-cmp'
+	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'saadparwaiz1/cmp_luasnip'
+	Plug 'L3MON4D3/LuaSnip'
+	Plug 'lukas-reineke/headlines.nvim'
 call plug#end()
 
 
@@ -94,15 +104,6 @@ else
   match OverLength /\%101v.\+/
 endif
 
-"" TODO: all of the bellow is on testing
-" Format config
-" set expandtab
-" set tabstop=2
-" set shiftwidth=2
-" set softtabstop=2
-" set autoindent            " auto-indent
-" set shiftround            " always indent/outdent to the nearest tabstop
-"
 
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype go setlocal tabstop=4 sw=4 sts=4
@@ -165,10 +166,6 @@ set listchars=tab:▸·
 set clipboard=unnamed
 
 
-
-"" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
-set completeopt=menu,menuone,noselect
-
 " Disable quote concealing in JSON files
 let g:vim_json_conceal=0
 
@@ -190,10 +187,6 @@ let g:markdown_folding=1
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 
-" Format current file JSON format
-" :%!jq .
-"
-"
 "" Copilot setup
 "
 "" let g:copilot_node_command = 'path to nodejs binary'
@@ -224,4 +217,15 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+"" Git commands
+nnoremap <leader>gs :Git status<CR>
+nnoremap <leader>gl :Git log<CR>
+nnoremap <leader>gd :Git diff<CR>
+nnoremap <leader>gds :Git diff --staged<CR>
 
+"" Git diff current opened buffer
+nnoremap <leader>gdb :Git diff %<CR>
+
+
+"" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
+set completeopt=menu,menuone,noselect
