@@ -221,14 +221,10 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>gs :Git status<CR>
 nnoremap <leader>gl :Git log<CR>
 nnoremap <leader>gd :Git diff<CR>
-nnoremap <leader>gds :Git diff --staged<CR>
-
-"" Git add current opened buffer
-nnoremap <leader>ga :Git add %<CR>
-
-"" Git diff current opened buffer
 nnoremap <leader>gdb :Git diff %<CR>
-
+nnoremap <leader>gds :Git diff --staged<CR>
+nnoremap <leader>gdsb :Git diff --staged %<CR>
+nnoremap <leader>ga :Git add %<CR>
 
 "" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
 set completeopt=menu,menuone,noselect
