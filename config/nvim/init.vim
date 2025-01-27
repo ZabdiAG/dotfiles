@@ -69,9 +69,16 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'L3MON4D3/LuaSnip'
 call plug#end()
 
+"" Folding configuration, automatically folds file when open
+" https://stackoverflow.com/questions/78077278/treesitter-and-syntax-folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable                     " Disable folding at startup.
+set foldcolumn=1 		     " Show fold column
 
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use: filetype plugin on
+" Set fold method to indent on yaml,yml files
+autocmd FileType yaml,yml setlocal foldmethod=indent
+
 
 
 " change map keyboard button
@@ -84,7 +91,6 @@ map <leader>hl :set hlsearch!<CR>
 "" jq, JSON prettier file
 map <leader>jq :%!jq . <CR>
 
-syntax enable
 set t_Co=256              " enable 256-color mode.
 set number                " show line numbers
 set relativenumber
@@ -110,13 +116,9 @@ autocmd Filetype json setlocal ts=4 sw=4 sts=0 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype html setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
+autocmd Filetype org setlocal ts=2 sw=2 sts=0 expandtab
 
-"" Folding configuration, automatically folds file when open
-set foldcolumn=1
-set foldmethod=syntax
 
-" Set fold method to indent on yaml,yml files
-autocmd FileType yaml,yml setlocal foldmethod=indent
 
 
 "" resize split
@@ -227,6 +229,7 @@ nnoremap <leader>gdb :Git diff %<CR>
 nnoremap <leader>gds :Git diff --staged<CR>
 nnoremap <leader>gdsb :Git diff --staged %<CR>
 nnoremap <leader>ga :Git add %<CR>
+nnoremap <leader>gb :Git blame<CR>
 "==================== Git config END ====================
 
 
@@ -249,7 +252,7 @@ let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 
 "" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
-let g:go_fmt_experimental=1
+"let g:go_fmt_experimental=1
 
 
 " Status line types/signatures
