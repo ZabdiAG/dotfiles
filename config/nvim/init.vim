@@ -34,6 +34,7 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'tpope/vim-surround'
 	Plug 'easymotion/vim-easymotion'
 	Plug 'https://github.com/github/copilot.vim.git'
+	Plug 'vim-airline/vim-airline'
 
 	Plug 'junegunn/vim-easy-align'
 
@@ -97,7 +98,7 @@ set t_Co=256              " enable 256-color mode.
 set number                " show line numbers
 set relativenumber
 
-colorscheme kanagawa
+colorscheme kanagawa-wave
 
 " https://github.com/lifepillar/pgsql.vim
 let g:sql_type_default = 'pgsql'
