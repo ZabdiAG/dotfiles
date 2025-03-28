@@ -82,6 +82,8 @@ set foldcolumn=1 		     " Show fold column
 " Set fold method to indent on yaml,yml files
 autocmd FileType yaml,yml setlocal foldmethod=indent
 
+" lazy load foldmethod=syntax for gitcommit
+autocmd FileType gitcommit,git setlocal foldmethod=syntax
 
 
 " change map keyboard button
@@ -115,7 +117,7 @@ endif
 
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype go setlocal tabstop=4 sw=4 sts=4
-autocmd Filetype json setlocal ts=4 sw=4 sts=0 expandtab
+autocmd Filetype json setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype html setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
@@ -224,18 +226,6 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
-"==================== Git config ====================
-nnoremap <leader>gs :Git status<CR>
-nnoremap <leader>gl :Git log<CR>
-nnoremap <leader>gd :Git diff<CR>
-nnoremap <leader>gdb :Git diff %<CR>
-nnoremap <leader>gds :Git diff --staged<CR>
-nnoremap <leader>gdsb :Git diff --staged %<CR>
-nnoremap <leader>ga :Git add %<CR>
-nnoremap <leader>gb :Git blame<CR>
-"==================== Git config END ====================
-
-
 "" ====================== EXPERIMENTAL. https://github.com/hrsh7th/nvim-cmp/#recommended-configuration
 set completeopt=menu,menuone,noselect
 
@@ -246,3 +236,31 @@ set completeopt=menu,menuone,noselect
 if has('perl')
   let g:perl_host_prog = '/usr/bin/perl'
 endif
+
+"" create CopilotToggle function
+function! CopilotToggle()
+  if g:copilot_enabled == 0
+    let g:copilot_enabled = 1
+    echo "Copilot enabled"
+  else
+    let g:copilot_enabled = 0
+    echo "Copilot disabled"
+  endif
+endfunction
+
+
+"" Copilot disabled by default
+let g:copilot_enabled = 0
+"" toggle copilot disable|enable with vainilla vim
+map <leader>cop :call CopilotToggle()<CR>
+
+
+"" Insert random uuid generated with uuidgen command in the current cursor position avoiding inserting in a new line and removing the new line character
+function! InsertUuid()
+  let l:uuid = system('uuidgen')
+  let l:uuid = substitute(l:uuid, '\n', '', 'g')
+  execute "normal i" . l:uuid
+endfunction
+
+"" Insert random uuid with leader key
+map <leader>uuid :call InsertUuid()<CR>
