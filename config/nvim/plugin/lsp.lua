@@ -1,4 +1,4 @@
+-- https://github.com/neovim/nvim-lspconfig
 -- Setup language servers.
-local lspconfig = require('lspconfig')
 
-lspconfig.gopls.setup{}
+vim.lsp.enable('gopls')
