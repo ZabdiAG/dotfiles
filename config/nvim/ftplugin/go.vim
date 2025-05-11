@@ -1,22 +1,3 @@
-"let g:go_def_mode='gopls'
-"let g:go_info_mode='gopls'
-
-"let g:go_fmt_command = "gopls"	 " format with goimports instead of gofmt
-"let g:go_gopls_gofumpt=1
-
-
-"" https://github.com/daixiang0/gci
-"" let g:go_fmt_command = "gci print"	 " format with goimports instead of gofmt
-
-
-
-"" there is an issue, how to not fold on save? https://github.com/fatih/vim-go/issues/3098
-"let g:go_fmt_experimental=1
-
-
-" Status line types/signatures
-"" let g:go_auto_type_info = 1
-
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
@@ -45,3 +26,8 @@ au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 au Filetype go map <leader>ts :normal i time.Sleep(time.Minute*10<CR>
+
+
+" when cursor is inside brackets or parenthesis, and hit return key, it will insert a new
+" line and indent it, move closing bracket to the next line
+au FileType go inoremap <expr> <CR> getline('.') =~# '^\s*}' ? "\<C-o>O" : "\<CR>"

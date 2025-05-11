@@ -12,7 +12,7 @@ lspconfig.gopls.setup {
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { buffer = bufnr, desc = 'Show diagnostics' })
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr, desc = 'Go to previous diagnostic' })
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr, desc = 'Go to next diagnostic' })
-    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { buffer = bufnr, desc = 'Show diagnostics in quickfix' })
+    vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { buffer = bufnr, desc = 'Show diagnostics in quickfix' })
 
     -- Configure diagnostic signs (the little markers in the gutter)
     vim.fn.sign_define('LspDiagnosticsSignError', { text = 'E', texthl = 'DiagnosticSignError' })
@@ -21,7 +21,7 @@ lspconfig.gopls.setup {
     vim.fn.sign_define('LspDiagnosticsSignInfo', { text = 'I', texthl = 'DiagnosticSignInfo' })
 
     vim.diagnostic.config({
-      virtual_text = { spacing = 3, severity_sort = true }, -- Show diagnostics inline (optional)
+      virtual_text = { spacing = 2, severity_sort = true }, -- Show diagnostics inline (optional)
       signs = true, -- Show diagnostics in the sign column (gutter)
       underline = true, -- Underline diagnostic text (optional)
       update_in_insert = false, -- Only update diagnostics when leaving insert mode (performance)
