@@ -44,7 +44,7 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'kevinhwang91/nvim-ufo'
 	Plug 'kevinhwang91/promise-async' " Needed by nvim-ufo
 	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-telescope/telescope.nvim' , { 'tag': '0.1.6' }
+	Plug 'nvim-telescope/telescope.nvim' , { 'tag': '0.1.8' }
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 	Plug 'nvim-orgmode/orgmode'
@@ -57,19 +57,20 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'hashivim/vim-terraform'
 	Plug 'cappyzawa/starlark.vim'
 
+	Plug 'lukas-reineke/indent-blankline.nvim'
+	Plug 'lukas-reineke/headlines.nvim'
+
 	"" Themes
 	Plug 'rebelot/kanagawa.nvim'
 
 	" Experimenting
-	Plug 'williamboman/mason.nvim'
-	Plug 'williamboman/mason-lspconfig.nvim'
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/nvim-cmp'
 	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'hrsh7th/cmp-buffer'
+	Plug 'hrsh7th/cmp-path'
 	Plug 'saadparwaiz1/cmp_luasnip'
 	Plug 'L3MON4D3/LuaSnip'
-	Plug 'lukas-reineke/indent-blankline.nvim'
-	Plug 'lukas-reineke/headlines.nvim'
 call plug#end()
 
 "" Folding configuration, automatically folds file when open
@@ -264,3 +265,17 @@ endfunction
 
 "" Insert random uuid with leader key
 map <leader>uuid :call InsertUuid()<CR>
+
+
+"" shortcuts for Location List
+nnoremap <leader>ll :lwindow<CR>
+nnoremap <leader>lq :lclose<CR>
+nnoremap <leader>ll :lnext<CR>
+nnoremap <leader>lh :lprevious<CR>
+
+"" shortcuts for Quickfix List
+nnoremap <leader>kl :cwindow<CR>
+nnoremap <leader>kq :cclose<CR>
+nnoremap <leader>kl :cnext<CR>
+nnoremap <leader>kh :cprevious<CR>
+nnoremap <leader>kf :cfile %<CR>
