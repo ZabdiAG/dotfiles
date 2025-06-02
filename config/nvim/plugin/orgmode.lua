@@ -21,7 +21,7 @@ require('orgmode').setup({
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
-    --additional_vim_regex_highlighting = {'org'}, -- This line is needed
+    additional_vim_regex_highlighting = {'org'}, -- This line is needed
   },
   --ensure_installed = {'org'},
 }

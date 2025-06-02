@@ -57,7 +57,7 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'hashivim/vim-terraform'
 	Plug 'cappyzawa/starlark.vim'
 
-	Plug 'lukas-reineke/indent-blankline.nvim'
+	Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 	Plug 'lukas-reineke/headlines.nvim'
 
 	"" Themes
@@ -70,7 +70,7 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'hrsh7th/cmp-buffer'
 	Plug 'hrsh7th/cmp-path'
 	Plug 'saadparwaiz1/cmp_luasnip'
-	Plug 'L3MON4D3/LuaSnip'
+	Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} " Replace <CurrentMajor> by the latest released major (first number of latest release)
 call plug#end()
 
 "" Folding configuration, automatically folds file when open
