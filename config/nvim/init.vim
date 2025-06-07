@@ -59,6 +59,11 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 
 	Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 	Plug 'lukas-reineke/headlines.nvim'
+	Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} " Replace <CurrentMajor> by the latest released major (first number of latest release)
+
+	"" Smooth scrolling
+	"" https://github.com/karb94/neoscroll.nvim
+	Plug 'karb94/neoscroll.nvim'
 
 	"" Themes
 	Plug 'rebelot/kanagawa.nvim'
@@ -70,7 +75,6 @@ call plug#begin() " $HOME/.local/share/nvim/plugged
 	Plug 'hrsh7th/cmp-buffer'
 	Plug 'hrsh7th/cmp-path'
 	Plug 'saadparwaiz1/cmp_luasnip'
-	Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} " Replace <CurrentMajor> by the latest released major (first number of latest release)
 call plug#end()
 
 "" Folding configuration, automatically folds file when open
@@ -119,7 +123,9 @@ endif
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype go setlocal tabstop=4 sw=4 sts=4
 autocmd Filetype json setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype vim setlocal ts=2 sw=2 sts=0 tabstop
 autocmd Filetype ruby setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype lua setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype html setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 sts=0 expandtab
 autocmd Filetype org setlocal ts=2 sw=2 sts=0 expandtab
